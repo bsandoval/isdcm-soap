@@ -48,9 +48,14 @@ public class SearchVideoWS {
 
     /**
      * Web service operation
+     * @param request
+     * @return 
      */
     @WebMethod(operationName = "searchByCreationDate")
-    public List<VideoDTO> searchByCreationDate(@WebParam(name = "day") int day, @WebParam(name = "month") int month, @WebParam(name = "year") int year) {
-        return videoDAO.searchByCreationDate(day, month, year);
+    public List<VideoDTO> searchByCreationDate(@WebParam(name = "searchByCreationDateRequest") SearchByCreationDateRequest request) {
+        if(request == null){
+            request = new SearchByCreationDateRequest();
+        }
+        return videoDAO.searchByCreationDate(request.getDay(), request.getMonth(), request.getYear());
     }
 }
